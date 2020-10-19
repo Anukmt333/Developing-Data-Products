@@ -1,0 +1,25 @@
+---
+title: "Map"
+author: "Anusha"
+date: "10/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=TRUE, results=FALSE}
+data <- "http://www.cs.wpi.edu/~cs1004/a16/Resources/SacramentoCrimeJanuary2006.csv"
+df <- read.csv(url(data))
+df <- df[sample(nrow(df), 800), c(8,9)]
+```
+ 
+
+```{r Leaflet, echo=TRUE}
+library(leaflet)
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions())
+```
